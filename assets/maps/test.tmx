@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="20" height="20" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="overland_preview" tilewidth="32" tileheight="32">
+  <image source="../graphics/overland_preview.png" width="224" height="224"/>
+ </tileset>
+ <layer name="layer1" width="20" height="20">
+  <data encoding="base64" compression="zlib">
+   eJyTYmBgEKcSlgBiRSCWoxKWB2IeINYCYk0q0DDzDIHYgAr0qPtG3TfqvlH3keI+ZiBmgWJWIt3HiwdzATE3FONTywk1TxiIRfBgQSTziFELADH1O0o=
+  </data>
+ </layer>
+ <layer name="collision" width="20" height="20" opacity="0.43">
+  <data encoding="base64" compression="zlib">
+   eJwTYmBgEKIyphYYNW/UvFHzRs0bTuaRUlbSyjxqYgAgDwXp
+  </data>
+ </layer>
+ <objectgroup name="objects" width="20" height="20">
+  <object type="harbor" x="247" y="524" width="145" height="116"/>
+ </objectgroup>
+</map>
