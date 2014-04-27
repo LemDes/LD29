@@ -13,6 +13,7 @@ class BoatStage extends Scene
 	var map : TmxMap;
 	
 	public var ship : entities.Ship;
+	public var radar : entities.Radar;
 	public var harbor : entities.Harbor;
 	
 	private var minItem:Int = 10;
@@ -62,6 +63,7 @@ class BoatStage extends Scene
 		}
 		
 		add(ship = new entities.Ship("small"));
+		add(radar = new entities.Radar(100,60,60,500,500));
 	}
 	
 	override public function update ()

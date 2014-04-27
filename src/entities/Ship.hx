@@ -82,9 +82,12 @@ class Ship extends Entity
 		}		
 		
 		moveAtAngle(cast(graphic, Image).angle + 90, dy, "solid");
+		cast(HXP.scene,scenes.BoatStage).radar.moveAtAngle(cast(graphic, Image).angle + 90, dy, "");
 		
 		scene.camera.x = x - HXP.screen.width/2 - cast(graphic, Image).width/2;
 		scene.camera.y = y - HXP.screen.height/2 - cast(graphic, Image).height/2;
+		
+		cast(HXP.scene,scenes.BoatStage).radar.setPosition(Std.int(x),Std.int(y));
 	}
 	
 	public function sell()

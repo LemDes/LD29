@@ -17,7 +17,7 @@ class Treasure extends Entity
 	{
 		super(x,y);
 		
-		weight = Std.random(maxWeight);
+		weight = 1 + Std.random(maxWeight);
 		price = weight * Std.random(maxPricePerWeight);
 		
 		setHitbox(10,10);

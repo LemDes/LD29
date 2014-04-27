@@ -15,7 +15,7 @@ class Harbor extends Entity
 	
 	override public function update ()
 	{
-		var ship:Ship = cast(scene, scenes.BoatStage).ship;;
+		var ship:Ship = cast(scene, scenes.BoatStage).ship;
 		var collideShip = collide("ship", x, y) != null;
 		
 		if (collideShip != _collideShip)
