@@ -82,11 +82,13 @@ class RadarUI extends Entity
 		
 		for (treasure in treasureList)
 		{
-			var relativeX = Std.int(radius*(treasure.x - radar.x + radar.radius)/(2*radar.radius)) ;
-			var relativeY = Std.int(radius*(treasure.y - radar.y + radar.radius)/(2*radar.radius)) ;
+			var scale = radius/radar.radius;
+			var relativeX = Std.int((treasure.x - radar.x + radar.radius) * scale) ;
+			var relativeY = Std.int((treasure.y - radar.y + radar.radius) * scale) ;
 			var dot = Image.createCircle(2, 0x00FF00);
-			dot.x = relativeX - 2 + radius/2;
-			dot.y = relativeY - 2 + radius/2;
+			dot.x = relativeX - 2;
+			dot.y = relativeY - 2;
+			// trace(dot.x + " " + dot.y);
 			gl.add(dot);			
 		}
 	}
