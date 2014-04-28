@@ -2,6 +2,7 @@ package entities;
 
 import com.haxepunk.Entity;
 import com.haxepunk.HXP;
+import com.haxepunk.masks.Circle;
 
 class Radar extends Entity
 {
@@ -11,7 +12,8 @@ class Radar extends Entity
 	{
 		super(x,y);
 		this.radius = radius;
-		setHitbox(2*radius,2*radius,Std.int(x-3*radius), Std.int(y-3*radius));
+		mask = new Circle(radius, -1*Std.int(x-3*radius), -1*Std.int(y-3*radius));
+		//setHitbox(2*radius,2*radius,Std.int(x-3*radius), Std.int(y-3*radius));
 		type = "radar";
 	}
 		
@@ -19,7 +21,5 @@ class Radar extends Entity
 	{
 		this.x = x;
 		this.y = y;
-	}
-		
-		
+	}		
 }
