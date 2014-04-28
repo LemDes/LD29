@@ -141,7 +141,7 @@ class BoatStage extends Scene
 			var e = addGraphic(cashGUI);
 			e.followCamera = true;
 			e.y = 10;
-			e.x = dx;
+			e.x = dx + 30;
 			dx = e.x + cashGUI.width;
 			// trace(e.x);
 		}
