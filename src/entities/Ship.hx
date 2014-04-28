@@ -18,8 +18,11 @@ class Ship extends Entity
 	
 	public var capacity:Int = 0;
 	var maxCapacity:Int = 10;
+	var capacityGUI:Text;
 	var treasureList:Array<Treasure> = new Array<Treasure>();
+	
 	public var cash:Int = 0;
+	var cashGUI:Text;
 	
 	public var fuel(default, null):Int;
 	var fuelMax:Int;
@@ -37,10 +40,36 @@ class Ship extends Entity
 		
 		fuel = this.fuelMax = fuelMax;
 		fuel *= 15;
-		fuelGUI = new Text('Fuel: ${Std.int(fuel / 15)} / $fuelMax', {color: 0, size: 20});
-		var e = HXP.scene.addGraphic(fuelGUI);
-		e.followCamera = true;
-		e.x = e.y = 30;
+		
+		{
+			var dx : Float = 0;
+			
+			{
+				fuelGUI = new Text('Fuel: ${Std.int(fuel / 15)} / $fuelMax', {color: 0, size: 20});
+				var e = HXP.scene.addGraphic(fuelGUI);
+				e.followCamera = true;
+				e.x = 40;
+				e.y = 10;
+				dx = e.x + fuelGUI.width;
+			}
+			
+			{
+				capacityGUI = new Text('Cargo: ${capacity} / $maxCapacity', {color: 0, size: 20});
+				var e = HXP.scene.addGraphic(capacityGUI);
+				e.followCamera = true;
+				e.y = 10;
+				e.x = dx + 30;
+				dx = e.x + capacityGUI.width;
+			}
+			
+			{
+				cashGUI = new Text('Money: ${cash}$$', {color: 0, size: 20});
+				var e = HXP.scene.addGraphic(cashGUI);
+				e.followCamera = true;
+				e.y = 10;
+				e.x = dx + 30;
+			}
+		}
 		
 		var boat = new Image('graphics/ships/ship_${type}_body.png');
 		boat.centerOO();
@@ -88,7 +117,7 @@ class Ship extends Entity
 					}
 					else
 					{
-						HXP.scene.add(new ui.Message("This treasure weights too much", HXP.camera.x, HXP.camera.y + HXP.height - 20,4));
+						HXP.scene.add(new ui.Message("This treasure weights too much", HXP.camera.x, HXP.camera.y + HXP.height - 40, 4));
 					}
 				}
 			}
@@ -116,6 +145,9 @@ class Ship extends Entity
 			moveAtAngle(cast(graphic, Image).angle + 90, dy, "solid");
 			fuel -= Std.int(HXP.distance(x, y, ox, oy));
 			fuelGUI.text = 'Fuel: ${Std.int(fuel / 15)} / $fuelMax';
+			
+			capacityGUI.text = 'Cargo: ${capacity} / $maxCapacity';
+			cashGUI.text = 'Money: ${cash}$$';
 			
 			cast(HXP.scene,scenes.BoatStage).radar.moveAtAngle(cast(graphic, Image).angle + 90, dy, "");
 			
@@ -178,12 +210,21 @@ class Ship extends Entity
 	
 	public function sell()
 	{
-		for (treasure in treasureList)
-		{	
-			treasureList.remove(treasure);
-			cash += treasure.price;
-		}
+		cash += value();
+		treasureList = new Array<Treasure>();
 		trace(cash);
 		capacity = 0;
+	}
+	
+	public function value ()
+	{
+		var c = 0;
+		
+		for (treasure in treasureList)
+		{
+			c += treasure.price;
+		}
+		
+		return c;
 	}
 } 
