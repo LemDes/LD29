@@ -18,6 +18,7 @@ class RadarUI extends Entity
 	private var gl:Graphiclist = new Graphiclist();
 	
 	private var radius:Int;
+	var boatType:String;
 	
 	public function new(radius:Int, x:Int=0, y:Int=0)
 	{
@@ -28,8 +29,8 @@ class RadarUI extends Entity
 		
 		background = createRadar(radius);	
 		
-		var type = "small";
-		boat = new Image('graphics/ships/ship_${type}_body.png');
+		boatType = cast(HXP.scene,scenes.BoatStage).ship.boatType;
+		boat = new Image('graphics/ships/ship_${boatType}_body.png');
 		boat.centerOO();
 		var scale = radius/cast(HXP.scene,scenes.BoatStage).radar.radius;
 		boat.scaleX = scale;
@@ -72,6 +73,19 @@ class RadarUI extends Entity
 	override public function update()
 	{
 		gl.removeAll();
+		
+		// trace( cast(HXP.scene, scenes.BoatStage).ship.boatType+ " " + boatType);
+		if (cast(HXP.scene, scenes.BoatStage).ship.boatType != boatType)
+		{
+			boatType = cast(HXP.scene, scenes.BoatStage).ship.boatType;
+			boat = new Image('graphics/ships/ship_${boatType}_body.png');
+			boat.centerOO();
+			var scale = radius/cast(HXP.scene,scenes.BoatStage).radar.radius;
+			boat.scaleX = scale;
+			boat.scaleY = scale;
+			boat.x = radius;
+			boat.y = radius;
+		}
 		
 		var treasureList = new Array<Treasure>();
 		var radar = cast(HXP.scene, scenes.BoatStage).radar;

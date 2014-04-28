@@ -17,59 +17,69 @@ class Ship extends Entity
 	static inline var SPEED:Int = 3;
 	
 	public var capacity:Int = 0;
-	var maxCapacity:Int = 10;
-	var capacityGUI:Text;
+	public var maxCapacity(default,null):Int;
+	
 	var treasureList:Array<Treasure> = new Array<Treasure>();
 	
-	public var cash:Int = 0;
-	var cashGUI:Text;
+	public var cash:Int;
 	
 	public var fuel:Int;
 	public var fuelMax:Int;
-	var fuelGUI:Text;
 	var alive:Bool = true;
+	
 	
 	var time : Float = 0;
 	var score : Int = 0;
 	
+	public var boatType:String;
+	
 	public var paused : Bool = false;
 		
-	override public function new (type:String, fuelMax:Int, x:Float, y:Float)
+	override public function new (type:String, fuelMax:Int, maxCapacity:Int, x:Float, y:Float,?cash:Int=0)
 	{
 		super(x, y);
 		
+		boatType = type;
+		
 		fuel = this.fuelMax = fuelMax;
+		this.maxCapacity = maxCapacity;
+		
+		this.cash = cash;
+		
 		fuel *= 15;
 		
-		{
-			var dx : Float = 0;
+		// {
+			// var dx : Float = 0;
 			
-			{
-				fuelGUI = new Text('Fuel: ${Std.int(fuel / 15)} / $fuelMax', 0, 0, 0, 0, {color: 0, size: 20});
-				var e = HXP.scene.addGraphic(fuelGUI);
-				e.followCamera = true;
-				e.x = 40;
-				e.y = 10;
-				dx = e.x + fuelGUI.width;
-			}
+			// {
+				// fuelGUI = new Text('Fuel: ${Std.int(fuel / 15)} / $fuelMax', 0, 0, 0, 0, {color: 0, size: 20});
+				// var e = HXP.scene.addGraphic(fuelGUI);
+				// e.followCamera = true;
+				// e.x = 40;
+				// e.y = 10;
+				// dx = e.x + fuelGUI.width;
+				// guiEntities[0] = e;
+			// }
 			
-			{
-				capacityGUI = new Text('Cargo: ${capacity} / $maxCapacity', 0, 0, 0, 0, {color: 0, size: 20});
-				var e = HXP.scene.addGraphic(capacityGUI);
-				e.followCamera = true;
-				e.y = 10;
-				e.x = dx + 30;
-				dx = e.x + capacityGUI.width;
-			}
+			// {
+				// capacityGUI = new Text('Cargo: ${capacity} / $maxCapacity', 0, 0, 0, 0, {color: 0, size: 20});
+				// var e = HXP.scene.addGraphic(capacityGUI);
+				// e.followCamera = true;
+				// e.y = 10;
+				// e.x = dx + 30;
+				// dx = e.x + capacityGUI.width;
+				// guiEntities[1] = e;
+			// }
 			
-			{
-				cashGUI = new Text('Money: ${cash}$$', 0, 0, 0, 0, {color: 0, size: 20});
-				var e = HXP.scene.addGraphic(cashGUI);
-				e.followCamera = true;
-				e.y = 10;
-				e.x = dx + 30;
-			}
-		}
+			// {
+				// cashGUI = new Text('Money: ${cash}$$', 0, 0, 0, 0, {color: 0, size: 20});
+				// var e = HXP.scene.addGraphic(cashGUI);
+				// e.followCamera = true;
+				// e.y = 10;
+				// e.x = dx + 30;
+				// guiEntities[2] = e;
+			// }
+		// }
 		
 		var boat = new Image('graphics/ships/ship_${type}_body.png');
 		boat.centerOO();
@@ -157,7 +167,7 @@ class Ship extends Entity
 			
 			fuel -= Std.int(HXP.distance(x, y, ox, oy));
 			
-			updateGUI();
+			// updateGUI();
 			
 			cast(HXP.scene,scenes.BoatStage).radar.moveAtAngle(cast(graphic, Image).angle + 90, dy, "");
 			
@@ -238,10 +248,18 @@ class Ship extends Entity
 		return c;
 	}
 	
-	public function updateGUI ()
-	{
-		fuelGUI.text = 'Fuel: ${Std.int(fuel / 15)} / $fuelMax';			
-		capacityGUI.text = 'Cargo: ${capacity} / $maxCapacity';
-		cashGUI.text = 'Money: ${cash}$$';
-	}
+	// public function updateGUI ()
+	// {
+		// fuelGUI.text = 'Fuel: ${Std.int(fuel / 15)} / $fuelMax';			
+		// capacityGUI.text = 'Cargo: ${capacity} / $maxCapacity';
+		// cashGUI.text = 'Money: ${cash}$$';
+	// }
+	
+	// override public function removed()
+	// {
+		// for (e in guiEntities)
+		// {
+			// HXP.scene.remove(e);
+		// }
+	// }
 } 

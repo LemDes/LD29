@@ -11,6 +11,8 @@ import com.haxepunk.utils.Key;
 class Harbor extends Entity
 {
 	var shop = new Array<Entity>();
+	var mediumBoatPrice:Int = 1000;
+	var largeBoatPrice:Int = 20000;
 	
 	public function new (x:Float, y:Float, width:Float, height:Float)
 	{
@@ -102,7 +104,7 @@ class Harbor extends Entity
 	
 	function updateShop()
 	{
-		cast(scene, scenes.BoatStage).ship.updateGUI();
+		cast(scene, scenes.BoatStage).updateGUI();
 		closeShop();
 		openShop();
 		scene.updateLists();
@@ -137,12 +139,30 @@ class Harbor extends Entity
 	
 	function buyMedium ()
 	{
-		
+		var boatStage:scenes.BoatStage = cast(scene, scenes.BoatStage);
+		var ship:Ship  = boatStage.ship;
+		if (ship.cash >= mediumBoatPrice)
+		{
+			ship.cash -= mediumBoatPrice;
+		}
+		ship.sell();
+		HXP.scene.remove(ship);
+		HXP.scene.add(boatStage.ship = new Ship("medium",250,30, boatStage.boatStartX, boatStage.boatStartY,ship.cash));
+		boatStage.radar.radius = 75;
 	}
 	
 	function buyLarge ()
 	{
-		
+		var boatStage:scenes.BoatStage = cast(scene, scenes.BoatStage);
+		var ship:Ship  = boatStage.ship;
+		if (ship.cash >= largeBoatPrice)
+		{
+			ship.cash -= largeBoatPrice;
+		}
+		ship.sell();
+		HXP.scene.remove(ship);
+		HXP.scene.add(boatStage.ship = new Ship("large",600,100, boatStage.boatStartX, boatStage.boatStartY,ship.cash));
+		boatStage.radar.radius = 100;
 	}
 	
 	var _collideShip : Bool = false;
