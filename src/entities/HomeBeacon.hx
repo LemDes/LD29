@@ -31,8 +31,13 @@ class HomeBeacon extends Entity
 		arrow.angle = phi;
 		phi *= HXP.RAD;
 		
-		x = ship.x + radius * Math.cos(phi);
-		y = ship.y + radius * Math.sin(phi);
+		// x = ship.x + radius * Math.cos(phi);
+		// y = ship.y + radius * Math.sin(phi);
+		
+		x = Std.int((ship.x + harbor.x) /2 );
+		HXP.clamp(x,HXP.camera.x, HXP.camera.x + HXP.width);
+		y = Std.int((ship.y + harbor.y) /2 );
+		HXP.clamp(y,HXP.camera.y, HXP.camera.y + HXP.height);
 		
 		var d = Std.int(HXP.distance(ship.x, ship.y, harbor.x + harbor.width/2, harbor.y + harbor.height/2));
 		distance.text = '${d}m';
