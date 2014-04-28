@@ -52,10 +52,10 @@ class BoatStage extends Scene
 		
 		while ( minItem > treasures.length)
 		{
-			var x = Std.random(map.width) * map.tileWidth;
-			var y = Std.random(map.height) * map.tileHeight;
+			var x = map.tileWidth + Std.random(map.width-2) * map.tileWidth;
+			var y = map.tileHeight + Std.random(map.height-2) * map.tileHeight;
 			
-			if (collider.collideTypes(["solid", "harbor"], x, y, true) == null)
+			if (collider.collideTypes(["solid", "treasure", "harbor"], x, y, true) == null)
 			{
 				var t = new entities.Treasure(x, y);
 				treasures.push(t);
