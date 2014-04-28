@@ -41,7 +41,6 @@ class Ship extends Entity
 		super(x, y);
 		
 		boatType = type;
-		shipSound = new Sfx(#if flash "audio/ship.mp3" #else "audio/ship.ogg" #end);
 		fuel = this.fuelMax = fuelMax;
 		this.maxCapacity = maxCapacity;
 		

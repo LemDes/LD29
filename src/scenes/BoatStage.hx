@@ -18,7 +18,8 @@ class BoatStage extends Scene
 	public var radarUI : entities.RadarUI;
 	public var harbor : entities.Harbor;
 	
-	private var minItem:Int = 750;
+	private var minItem:Int = 2;
+	private var maxTry:Int = 5;
 	private var proba:Float = 1.0 ;
 	
 	public var boatStartX:Float;
