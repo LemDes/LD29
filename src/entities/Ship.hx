@@ -28,6 +28,8 @@ class Ship extends Entity
 	
 	var time : Float = 0;
 	var score : Int = 0;
+	
+	public var paused : Bool = false;
 		
 	override public function new (type:String, fuelMax:Int)
 	{
@@ -56,6 +58,11 @@ class Ship extends Entity
 	
 	override public function update ()
 	{
+		if (paused)
+		{
+			return;
+		}
+		
 		if (fuel > 0)
 		{
 			time += HXP.elapsed;
@@ -117,12 +124,6 @@ class Ship extends Entity
 		else if (alive)
 		{
 			alive = false;
-			
-			var t = new Text("Game Over!", {color: 0, size: 50});
-			t.centerOrigin();
-			var te = scene.addGraphic(t);
-			te.x = centerX;
-			te.y = centerY - height;
 			
 			var expl = new Spritemap("graphics/exp2_0.png", 64, 64, gameOver);
 			expl.add("boom", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 15, 15, 15, 15], 10, false);
