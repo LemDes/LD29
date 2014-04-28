@@ -118,7 +118,7 @@ class Ship extends Entity
 					}
 					else
 					{
-						HXP.scene.add(new ui.Message("This treasure weights too much", HXP.camera.x, HXP.camera.y + HXP.height - 40, 4));
+						HXP.scene.add(new ui.Message("This treasure weights too much", 4));
 					}
 				}
 			}
@@ -145,10 +145,8 @@ class Ship extends Entity
 			var oy = y;
 			moveAtAngle(cast(graphic, Image).angle + 90, dy, "solid");
 			fuel -= Std.int(HXP.distance(x, y, ox, oy));
-			fuelGUI.text = 'Fuel: ${Std.int(fuel / 15)} / $fuelMax';
 			
-			capacityGUI.text = 'Cargo: ${capacity} / $maxCapacity';
-			cashGUI.text = 'Money: ${cash}$$';
+			updateGUI();
 			
 			cast(HXP.scene,scenes.BoatStage).radar.moveAtAngle(cast(graphic, Image).angle + 90, dy, "");
 			
@@ -214,7 +212,6 @@ class Ship extends Entity
 	{
 		cash += value();
 		treasureList = new Array<Treasure>();
-		trace(cash);
 		capacity = 0;
 	}
 	
@@ -228,5 +225,12 @@ class Ship extends Entity
 		}
 		
 		return c;
+	}
+	
+	public function updateGUI ()
+	{
+		fuelGUI.text = 'Fuel: ${Std.int(fuel / 15)} / $fuelMax';			
+		capacityGUI.text = 'Cargo: ${capacity} / $maxCapacity';
+		cashGUI.text = 'Money: ${cash}$$';
 	}
 } 
