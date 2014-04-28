@@ -27,6 +27,7 @@ class Ship extends Entity
 	public var fuel(default, null):Int;
 	var fuelMax:Int;
 	var fuelGUI:Text;
+	var capacityGUI:Text;
 	var alive:Bool = true;
 	
 	var time : Float = 0;
