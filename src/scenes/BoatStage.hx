@@ -23,7 +23,7 @@ class BoatStage extends Scene
 	
 	override public function begin ()
 	{	
-		map = TmxMap.loadFromFile("maps/test.tmx");
+		map = TmxMap.loadFromFile("maps/75.tmx");
 		
 		// create the map
 		var e = new TmxEntity(map);
@@ -40,8 +40,12 @@ class BoatStage extends Scene
 		{
 			if (object.type == "harbor")
 			{
-				harbor = new entities.Harbor(object.x, object.y, object.width, object.height);
-				add(harbor);
+				add(harbor = new entities.Harbor(object.x, object.y, object.width, object.height));
+			}
+			
+			if (object.type == "ship")
+			{
+				add(ship = new entities.Ship("small", 100, object.x, object.y));
 			}
 		}
 		
@@ -63,7 +67,6 @@ class BoatStage extends Scene
 			}
 		}
 		
-		add(ship = new entities.Ship("small", 100));
 		add(radar = new entities.Radar(100, 400, 400));
 		add(radarUI = new entities.RadarUI(40, HXP.screen.width - 100, HXP.screen.height - 100));
 		add(new entities.HomeBeaconArrow());

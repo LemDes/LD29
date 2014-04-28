@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="75" height="75" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="overland_preview" tilewidth="32" tileheight="32">
+  <image source="../../../../hg/LD/LD29/assets/graphics/overland_preview.png" width="224" height="224"/>
+ </tileset>
+ <tileset firstgid="50" name="overland_preview" tilewidth="32" tileheight="32">
+  <image source="../graphics/overland_preview.png" width="224" height="224"/>
+ </tileset>
+ <layer name="layer1" width="75" height="75">
+  <data encoding="base64" compression="zlib">
+   eJzt2M1Kw0AUhuFkqSgoFioKiuIViO3Gn4Xo/d+SJ+BiKKSNOHhm5Fm8u0P48mSXq2EY1g12XZS9ZeoyuotuGuy+KHvL1G10Ej1Uaqz8rLHyM3/TcWWrmrFixYoVK1asWLFixYoVK1bZW1ixYpXfnNXYWNlOPVm18G1YsWLFqsVYsWLFqpdYsWLFqpdYsWLFqpdYsWLFqpdYsWLFqpdYsWLFqpdYsWLFqpdYscq2ymzp9r+OFStWrFixYpW/gxUrVu3EihUrsWL1H6we95T93i1Z/fS/41O0ibZ7fMubTKvTyh0daPf+OXqJXqO3mcqb2nuXNFldRKvKnR1o9/792+Ej+pypvKm9d0nn0RcoL7Vb
+  </data>
+ </layer>
+ <layer name="collision" width="75" height="75" opacity="0.48">
+  <data encoding="base64" compression="zlib">
+   eJzt0LEJADEMBEHVoP6L/RK8Dh4czMBlCsTuzKzlcaZVp1WnVadVp1WnVadVp1WnVadVp1WnVadVp1WnVadVp1WnVadVp1WnVadVp1WnVadVp1WnVadVp1WnVadVp1WnVadVp1WnVadVp1WnVadVp1WnVadVp1WnVadVp1WnVadVp1WnVadVp1WnVadVp1WnVadVp1WnVadVp1WnVadVp1WnVadVp1WnVadV90qrnfMv5eZPWnVrV/sASr8VqQ==
+  </data>
+ </layer>
+ <objectgroup name="objects" width="75" height="75">
+  <object type="ship" x="1228" y="2249" width="42" height="79"/>
+  <object type="harbor" x="995" y="2211" width="509" height="211"/>
+ </objectgroup>
+</map>
