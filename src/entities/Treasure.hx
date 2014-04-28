@@ -16,7 +16,7 @@ class Treasure extends Entity
 	static var maxWeight:Int = 20;
 	static var maxPricePerWeight:Int = 60;
 
-	public function new (x:Int, y:Int)
+	public function new (x:Float, y:Float)
 	{
 		super(x,y);
 		

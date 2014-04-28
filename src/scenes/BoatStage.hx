@@ -25,6 +25,8 @@ class BoatStage extends Scene
 	public var boatStartX:Float;
 	public var boatStartY:Float;
 	
+	public var treasureNumber:Int = 0;
+	
 	var fuelGUI:Text;
 	var capacityGUI:Text;
 	var cashGUI:Text;
@@ -83,6 +85,7 @@ class BoatStage extends Scene
 					if (collider.collideTypes(["solid", "harbor"], x, y, true) == null)
 					{
 						var t = new entities.Treasure(x, y);
+						treasureNumber += 1;
 						add(t);
 						c += 1;
 					}

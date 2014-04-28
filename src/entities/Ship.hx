@@ -27,6 +27,7 @@ class Ship extends Entity
 	public var fuel:Int;
 	public var fuelMax:Int;
 	var alive:Bool = true;
+	var victory:Bool = false;
 	
 	
 	var time : Float = 0;
@@ -47,39 +48,6 @@ class Ship extends Entity
 		this.cash = cash;
 		
 		fuel *= 15;
-		
-		// {
-			// var dx : Float = 0;
-			
-			// {
-				// fuelGUI = new Text('Fuel: ${Std.int(fuel / 15)} / $fuelMax', 0, 0, 0, 0, {color: 0, size: 20});
-				// var e = HXP.scene.addGraphic(fuelGUI);
-				// e.followCamera = true;
-				// e.x = 40;
-				// e.y = 10;
-				// dx = e.x + fuelGUI.width;
-				// guiEntities[0] = e;
-			// }
-			
-			// {
-				// capacityGUI = new Text('Cargo: ${capacity} / $maxCapacity', 0, 0, 0, 0, {color: 0, size: 20});
-				// var e = HXP.scene.addGraphic(capacityGUI);
-				// e.followCamera = true;
-				// e.y = 10;
-				// e.x = dx + 30;
-				// dx = e.x + capacityGUI.width;
-				// guiEntities[1] = e;
-			// }
-			
-			// {
-				// cashGUI = new Text('Money: ${cash}$$', 0, 0, 0, 0, {color: 0, size: 20});
-				// var e = HXP.scene.addGraphic(cashGUI);
-				// e.followCamera = true;
-				// e.y = 10;
-				// e.x = dx + 30;
-				// guiEntities[2] = e;
-			// }
-		// }
 		
 		var boat = new Image('graphics/ships/ship_${type}_body.png');
 		boat.centerOO();
@@ -124,6 +92,12 @@ class Ship extends Entity
 						capacity += treasure.weight;
 						treasureList.push(treasure);
 						scene.remove(treasure);
+						cast(scene, scenes.BoatStage).treasureNumber --;
+						if (cast(scene, scenes.BoatStage).treasureNumber == 0)
+						{
+							victory = true;
+							gameOver();
+						}
 						HXP.scene.add(new ui.Message("You picked a " + treasure.descr + ".",4));
 					}
 					else
@@ -205,12 +179,23 @@ class Ship extends Entity
 		}
 		
 		{
-			var t = new Text("Game Over!", 0, 0, 0, 0, {color: 0xFFFFFF, size: 50});
+			var t = new Text((victory) ? "You won" : "Game Over!", 0, 0, 0, 0, {color: 0xFFFFFF, size: 50});
 			t.centerOrigin();
 			t.x = HXP.halfWidth;
 			t.y = 100;
 			var e = scene.addGraphic(t);
 			e.followCamera = true;
+		}
+		{
+			if (victory)
+			{
+				var t = new Text("Write a fruit name in your comment", 0, 0, 0, 0, {color: 0xFFFFFF, size: 20});
+				t.centerOrigin();
+				t.x = HXP.halfWidth;
+				t.y = 150;
+				var e = scene.addGraphic(t);
+				e.followCamera = true;
+			}
 		}
 		
 		{
