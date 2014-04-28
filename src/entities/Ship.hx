@@ -24,6 +24,7 @@ class Ship extends Entity
 	public var fuel(default, null):Int;
 	var fuelMax:Int;
 	var fuelGUI:Text;
+	var capacityGUI:Text;
 	var alive:Bool = true;
 	
 	var time : Float = 0;
@@ -38,7 +39,12 @@ class Ship extends Entity
 		fuelGUI = new Text('Fuel: ${Std.int(fuel / 15)} / $fuelMax', {color: 0, size: 20});
 		var e = HXP.scene.addGraphic(fuelGUI);
 		e.followCamera = true;
-		e.x = e.y = 30;
+		e.x = e.y = 30;		
+		capacityGUI = new Text('Capacity: $capacity / $maxCapacity', {color: 0, size: 20});
+		var f = HXP.scene.addGraphic(capacityGUI);
+		f.followCamera = true;
+		f.x = 30;	
+		f.y = 60;
 		
 		var boat = new Image('graphics/ships/ship_${type}_body.png');
 		boat.centerOO();
@@ -110,6 +116,7 @@ class Ship extends Entity
 			moveAtAngle(cast(graphic, Image).angle + 90, dy, "solid");
 			fuel -= Std.int(HXP.distance(x, y, ox, oy));
 			fuelGUI.text = 'Fuel: ${Std.int(fuel / 15)} / $fuelMax';
+			capacityGUI.text = 'Capacity: $capacity / $maxCapacity';
 			
 			cast(HXP.scene,scenes.BoatStage).radar.moveAtAngle(cast(graphic, Image).angle + 90, dy, "");
 			
@@ -125,8 +132,6 @@ class Ship extends Entity
 			var t = new Text("Game Over!", {color: 0, size: 50});
 			t.centerOrigin();
 			var te = scene.addGraphic(t);
-			// te.x = centerX;
-			// te.y = centerY - height;
 			te.x = HXP.camera.x + HXP.width/2;
 			te.y = HXP.camera.y + HXP.height/2;
 			
@@ -186,7 +191,6 @@ class Ship extends Entity
 			treasureList.remove(treasure);
 			cash += treasure.price;
 		}
-		trace(cash);
 		capacity = 0;
 	}
 } 

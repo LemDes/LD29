@@ -20,7 +20,6 @@ class Harbor extends Entity
 		
 		if (collideShip != _collideShip)
 		{
-			trace(collideShip ? "Colliding" : "Not colliding");
 			_collideShip = collideShip;
 			if(collideShip)
 			{
