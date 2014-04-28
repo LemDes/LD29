@@ -146,7 +146,7 @@ class BoatStage extends Scene
 			// trace(e.x);
 		}
 		{
-			treasureGUI = new Text('Treasure: ${treasureNumber}', 0, 0, 0, 0, {color: 0, size: 20});
+			treasureGUI = new Text('Treasures: ${treasureNumber}', 0, 0, 0, 0, {color: 0, size: 20});
 			var e = addGraphic(treasureGUI);
 			e.followCamera = true;
 			e.y = 10;
@@ -160,6 +160,6 @@ class BoatStage extends Scene
 		fuelGUI.text = 'Fuel: ${Std.int(ship.fuel / 15)} / ${ship.fuelMax}';			
 		capacityGUI.text = 'Cargo: ${ship.capacity} / ${ship.maxCapacity}';
 		cashGUI.text = 'Money: ${ship.cash}$$';
-		treasureGUI.text = 'Treasure: ${treasureNumber}';
+		treasureGUI.text = 'Treasures: ${treasureNumber}';
 	}
 }

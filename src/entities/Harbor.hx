@@ -104,7 +104,7 @@ class Harbor extends Entity
 		if (ship.value() > 0)
 		{
 			var s = new Sfx(#if flash "audio/cash.mp3" #else "audio/cash.ogg" #end);
-			s.play();
+			s.play(HXP.volume);
 			ship.sell();
 		}
 		
@@ -122,7 +122,7 @@ class Harbor extends Entity
 	function buyFuel ()
 	{
 		var s = new Sfx(#if flash "audio/fuel.mp3" #else "audio/fuel.ogg" #end);
-		s.play();
+		s.play(HXP.volume);
 	}
 	
 	function buy10 ()

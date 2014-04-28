@@ -156,7 +156,7 @@ class Ship extends Entity
 			alive = false;
 			
 			var s = new Sfx(#if flash "audio/boom.mp3" #else "audio/boom.ogg" #end);
-			s.play();
+			s.play(HXP.volume);
 			
 			var expl = new Spritemap("graphics/exp2_0.png", 64, 64, gameOver);
 			expl.add("boom", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 15, 15, 15, 15], 10, false);
