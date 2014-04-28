@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
-	<meta title="LD29" package="ibilon.ld29" version="1.0.0" company="" />
+	<meta title="LD29 - Under the sea surface" package="ibilon.ld29" version="1.0.0" company="" />
 
  	<app file="Main" main="Main" path="bin" />
 

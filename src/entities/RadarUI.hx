@@ -34,7 +34,6 @@ class RadarUI extends Entity
 		var scale = 0.5*radius/cast(HXP.scene,scenes.BoatStage).radar.radius;
 		boat.scaleX = scale;
 		boat.scaleY = scale;
-		trace(scale + " "+ radius + " " + cast(HXP.scene,scenes.BoatStage).radar.radius);
 		boat.x = radius;
 		boat.y = radius;
 		
