@@ -19,7 +19,7 @@ class Harbor extends Entity
 		setHitbox(Std.int(width), Std.int(height));
 		type = "harbor";
 		
-		var t = new Text("Press S to open harbour shop", {color: 0, size: 20});
+		var t = new Text("Press S to open harbour shop", 0, 0, 0, 0, {color: 0, size: 20});
 		t.centerOrigin();
 		shopMsg = new Entity();
 		shopMsg.graphic = t;
