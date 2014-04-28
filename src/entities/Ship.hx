@@ -87,7 +87,7 @@ class Ship extends Entity
 		scene.camera.x = x - HXP.screen.width/2 - cast(graphic, Image).width/2;
 		scene.camera.y = y - HXP.screen.height/2 - cast(graphic, Image).height/2;
 		
-		cast(HXP.scene,scenes.BoatStage).radar.setPosition(Std.int(x),Std.int(y));
+		cast(HXP.scene,scenes.BoatStage).radar.setPosition(Std.int(x+(cast(graphic, Image).x)),Std.int(y+(cast(graphic, Image).y)));
 	}
 	
 	public function sell()

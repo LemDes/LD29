@@ -14,6 +14,7 @@ class BoatStage extends Scene
 	
 	public var ship : entities.Ship;
 	public var radar : entities.Radar;
+	public var radarUI : entities.RadarUI;
 	public var harbor : entities.Harbor;
 	
 	private var minItem:Int = 10;
@@ -63,7 +64,8 @@ class BoatStage extends Scene
 		}
 		
 		add(ship = new entities.Ship("small"));
-		add(radar = new entities.Radar(100,60,60,500,500));
+		add(radar = new entities.Radar(100,400,400));
+		add(radarUI = new entities.RadarUI(60,60,500,400));
 	}
 	
 	override public function update ()
