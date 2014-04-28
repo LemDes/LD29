@@ -20,6 +20,7 @@ class TextButton extends Entity
 		this.hoverColor = hoverColor;
 		this.cb = cb;
 		followCamera = true;
+		layer = -20;
 	}
 	
 	override public function update ()

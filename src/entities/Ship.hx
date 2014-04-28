@@ -15,7 +15,7 @@ import flash.geom.Point;
 
 class Ship extends Entity
 {
-	static inline var SPEED:Int = 3;
+	static inline var SPEED:Int = 5;
 	
 	public var capacity:Int = 0;
 	public var maxCapacity(default,null):Int;
