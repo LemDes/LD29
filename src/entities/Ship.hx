@@ -202,6 +202,7 @@ class Ship extends Entity
 			i.y = HXP.halfHeight;
 			var e = scene.addGraphic(i);
 			e.followCamera = true;
+			e.layer = -20;
 		}
 		
 		{
@@ -211,6 +212,7 @@ class Ship extends Entity
 			t.y = 100;
 			var e = scene.addGraphic(t);
 			e.followCamera = true;
+			e.layer = -20;
 		}
 		
 		{
@@ -219,6 +221,7 @@ class Ship extends Entity
 			t.y = 200;
 			var e = scene.addGraphic(t);
 			e.followCamera = true;
+			e.layer = -20;
 		}
 		
 		{
@@ -228,6 +231,7 @@ class Ship extends Entity
 			t.y = HXP.height - 100;
 			var e = scene.addGraphic(t);
 			e.followCamera = true;
+			e.layer = -20;
 		}
 	}
 	
