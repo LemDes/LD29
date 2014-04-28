@@ -160,11 +160,12 @@ class Harbor extends Entity
 		if (ship.cash >= mediumBoatPrice)
 		{
 			ship.cash -= mediumBoatPrice;
+			ship.sell();
+			HXP.scene.remove(ship);
+			HXP.scene.add(boatStage.ship = new Ship("medium",250,30, boatStage.boatStartX, boatStage.boatStartY,ship.cash));
+			boatStage.radar.radius = 75;
 		}
-		ship.sell();
-		HXP.scene.remove(ship);
-		HXP.scene.add(boatStage.ship = new Ship("medium",250,30, boatStage.boatStartX, boatStage.boatStartY,ship.cash));
-		boatStage.radar.radius = 75;
+		updateShop();
 	}
 	
 	function buyLarge ()
@@ -174,11 +175,12 @@ class Harbor extends Entity
 		if (ship.cash >= largeBoatPrice)
 		{
 			ship.cash -= largeBoatPrice;
+			ship.sell();
+			HXP.scene.remove(ship);
+			HXP.scene.add(boatStage.ship = new Ship("large",600,100, boatStage.boatStartX, boatStage.boatStartY,ship.cash));
+			boatStage.radar.radius = 100;
 		}
-		ship.sell();
-		HXP.scene.remove(ship);
-		HXP.scene.add(boatStage.ship = new Ship("large",600,100, boatStage.boatStartX, boatStage.boatStartY,ship.cash));
-		boatStage.radar.radius = 100;
+		updateShop();
 	}
 	
 	var _collideShip : Bool = false;
