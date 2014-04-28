@@ -66,6 +66,7 @@ class BoatStage extends Scene
 		add(ship = new entities.Ship("small"));
 		add(radar = new entities.Radar(100, 400, 400));
 		add(radarUI = new entities.RadarUI(40, HXP.screen.width - 100, HXP.screen.height - 100));
+		add(new entities.HomeBeacon());
 	}
 	
 	override public function update ()
