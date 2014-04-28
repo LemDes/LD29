@@ -15,7 +15,7 @@ class TextButton extends Entity
 	{
 		super(x, y);
 		
-		graphic = new Text(text, options);
+		graphic = new Text(text, 0, 0, 0, 0, options);
 		this.color = cast(graphic, Text).color = color;
 		this.hoverColor = hoverColor;
 		this.cb = cb;

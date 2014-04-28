@@ -45,7 +45,7 @@ class Ship extends Entity
 			var dx : Float = 0;
 			
 			{
-				fuelGUI = new Text('Fuel: ${Std.int(fuel / 15)} / $fuelMax', {color: 0, size: 20});
+				fuelGUI = new Text('Fuel: ${Std.int(fuel / 15)} / $fuelMax', 0, 0, 0, 0, {color: 0, size: 20});
 				var e = HXP.scene.addGraphic(fuelGUI);
 				e.followCamera = true;
 				e.x = 40;
@@ -54,7 +54,7 @@ class Ship extends Entity
 			}
 			
 			{
-				capacityGUI = new Text('Cargo: ${capacity} / $maxCapacity', {color: 0, size: 20});
+				capacityGUI = new Text('Cargo: ${capacity} / $maxCapacity', 0, 0, 0, 0, {color: 0, size: 20});
 				var e = HXP.scene.addGraphic(capacityGUI);
 				e.followCamera = true;
 				e.y = 10;
@@ -63,7 +63,7 @@ class Ship extends Entity
 			}
 			
 			{
-				cashGUI = new Text('Money: ${cash}$$', {color: 0, size: 20});
+				cashGUI = new Text('Money: ${cash}$$', 0, 0, 0, 0, {color: 0, size: 20});
 				var e = HXP.scene.addGraphic(cashGUI);
 				e.followCamera = true;
 				e.y = 10;
@@ -192,7 +192,7 @@ class Ship extends Entity
 		}
 		
 		{
-			var t = new Text("Game Over!", {color: 0xFFFFFF, size: 50});
+			var t = new Text("Game Over!", 0, 0, 0, 0, {color: 0xFFFFFF, size: 50});
 			t.centerOrigin();
 			t.x = HXP.halfWidth;
 			t.y = 100;
@@ -202,7 +202,7 @@ class Ship extends Entity
 		
 		{
 			score = cash;
-			var t = new Text('Final score: $score\nSurvived for: ${Std.int(time)}s', {color: 0xFFFFFF, size: 30});
+			var t = new Text('Final score: $score\nSurvived for: ${Std.int(time)}s', 0, 0, 0, 0, {color: 0xFFFFFF, size: 30});
 			t.x = 100;
 			t.y = 200;
 			var e = scene.addGraphic(t);
@@ -210,7 +210,7 @@ class Ship extends Entity
 		}
 		
 		{
-			var t = new Text("Thanks for playing.\n\nMade by ibilon and elnabo\nfor LD29.", {color: 0xFFFFFF, size: 20, align: "center"});
+			var t = new Text("Thanks for playing.\n\nMade by ibilon and elnabo\nfor LD29.", 0, 0, 0, 0, {color: 0xFFFFFF, size: 20, align: "center"});
 			t.centerOrigin();
 			t.x = HXP.halfWidth;
 			t.y = HXP.height - 100;

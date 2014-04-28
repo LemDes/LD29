@@ -16,7 +16,7 @@ class HomeBeaconDistance extends Entity
 	{
 		super();
 		
-		graphic = distance = new Text("0m", {color: 0});
+		graphic = distance = new Text("0m", 0, 0, 0, 0, {color: 0});
 	}
 	
 	override public function update ()
