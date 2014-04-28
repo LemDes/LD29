@@ -14,14 +14,11 @@ class Message extends Entity
 	
 	public function new(message:String, ?duration=5)
 	{
-		super(0, HXP.height - 20);		
-		// super(x,y);		
+		super(0, HXP.height - 20);
 		followCamera = true;
 		
 		timeStamp = Timer.stamp();
 		this.duration = duration;
-		// var text = new Text(message);
-		// text.color = 0x00ffff;
 		graphic = new Text(message);
 		cast(graphic, Text).color = 0;
 		
