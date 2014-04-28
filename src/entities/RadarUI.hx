@@ -14,6 +14,7 @@ import flash.display.LineScaleMode;
 class RadarUI extends Entity
 {
 	private var background:Image;
+	private var boat:Image;
 	private var gl:Graphiclist = new Graphiclist();
 	
 	private var radius:Int;
@@ -26,6 +27,16 @@ class RadarUI extends Entity
 		this.radius = radius;
 		
 		background = createRadar(radius);	
+		
+		var type = "small";
+		boat = new Image('graphics/ships/ship_${type}_body.png');
+		boat.centerOO();
+		var scale = 0.5*radius/cast(HXP.scene,scenes.BoatStage).radar.radius;
+		boat.scaleX = scale;
+		boat.scaleY = scale;
+		trace(scale + " "+ radius + " " + cast(HXP.scene,scenes.BoatStage).radar.radius);
+		boat.x = radius;
+		boat.y = radius;
 		
 		graphic = gl;
 	}
@@ -65,8 +76,10 @@ class RadarUI extends Entity
 		
 		var treasureList = new Array<Treasure>();
 		var radar = cast(HXP.scene, scenes.BoatStage).radar;
+		boat.angle = cast(cast(HXP.scene, scenes.BoatStage).ship.graphic, Image).angle;
 		radar.collideTypesInto(["treasure"], radar.x, radar.y, treasureList);
 		gl.add(background);
+		gl.add(boat);
 		
 		for (treasure in treasureList)
 		{
