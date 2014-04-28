@@ -5,3 +5,6 @@ CC-BY-SA http://tayokoart.com/
 # ships/*
 From http://opengameart.org/content/ships-with-ripple-effect
 CC-BY http://opengameart.org/users/chabull
+
+# exp2_0.png
+Public Domain

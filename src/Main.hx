@@ -9,6 +9,7 @@ class Main extends Engine
 	override public function init ()
 	{
 		#if debug HXP.console.enable(TraceCapture.Yes, Key.A); #end
+		HXP.defaultFont = "font/LinLibertine_R.ttf";
 		HXP.scene = new scenes.BoatStage();
 		HXP.screen.smoothing = true;
 		
