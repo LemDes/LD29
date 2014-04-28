@@ -30,6 +30,7 @@ class BoatStage extends Scene
 	var fuelGUI:Text;
 	var capacityGUI:Text;
 	var cashGUI:Text;
+	var treasureGUI:Text;
 	
 	override public function begin ()
 	{	
@@ -97,6 +98,7 @@ class BoatStage extends Scene
 		add(radarUI = new entities.RadarUI(40, HXP.screen.width - 100, HXP.screen.height - 100));
 		add(new entities.HomeBeaconArrow());
 		add(new entities.HomeBeaconDistance());
+		add(new ui.Mute(HXP.width - 30,10));
 	}
 	
 	override public function update ()
@@ -117,7 +119,7 @@ class BoatStage extends Scene
 			fuelGUI = new Text('Fuel: ${Std.int(ship.fuel / 15)} / $ship.fuelMax', 0, 0, 0, 0, {color: 0, size: 20});
 			var e = addGraphic(fuelGUI);
 			e.followCamera = true;
-			e.x = 40;
+			e.x = 10;
 			e.y = 10;
 			dx = e.x + fuelGUI.width/2;
 			// trace(fuelGUI.width);
@@ -139,7 +141,16 @@ class BoatStage extends Scene
 			var e = addGraphic(cashGUI);
 			e.followCamera = true;
 			e.y = 10;
-			e.x = dx ;
+			e.x = dx;
+			dx = e.x + cashGUI.width;
+			// trace(e.x);
+		}
+		{
+			treasureGUI = new Text('Treasure: ${treasureNumber}', 0, 0, 0, 0, {color: 0, size: 20});
+			var e = addGraphic(treasureGUI);
+			e.followCamera = true;
+			e.y = 10;
+			e.x = dx + 30;
 			// trace(e.x);
 		}
 	}
@@ -149,5 +160,6 @@ class BoatStage extends Scene
 		fuelGUI.text = 'Fuel: ${Std.int(ship.fuel / 15)} / ${ship.fuelMax}';			
 		capacityGUI.text = 'Cargo: ${ship.capacity} / ${ship.maxCapacity}';
 		cashGUI.text = 'Money: ${ship.cash}$$';
+		treasureGUI.text = 'Treasure: ${treasureNumber}';
 	}
 }

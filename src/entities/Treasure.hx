@@ -21,7 +21,7 @@ class Treasure extends Entity
 		super(x,y);
 		
 		weight = 1 + Std.random(maxWeight);
-		price = weight * Std.random(maxPricePerWeight);
+		price = weight * ( 3 + Std.random(maxPricePerWeight) );
 		
 		var i = Std.random(itemNames.length-1);
 		
