@@ -78,10 +78,11 @@ class Ship extends Entity
 						capacity += treasure.weight;
 						treasureList.push(treasure);
 						scene.remove(treasure);
+						HXP.scene.add(new ui.Message("You picked a " + treasure.descr + ".",4));
 					}
 					else
 					{
-						HXP.scene.add(new ui.Message("This treasure weights too much", HXP.camera.x, HXP.camera.y + HXP.height - 20,4));
+						HXP.scene.add(new ui.Message("This treasure weights too much",4));
 					}
 				}
 			}
@@ -124,8 +125,10 @@ class Ship extends Entity
 			var t = new Text("Game Over!", {color: 0, size: 50});
 			t.centerOrigin();
 			var te = scene.addGraphic(t);
-			te.x = centerX;
-			te.y = centerY - height;
+			// te.x = centerX;
+			// te.y = centerY - height;
+			te.x = HXP.camera.x + HXP.width/2;
+			te.y = HXP.camera.y + HXP.height/2;
 			
 			var expl = new Spritemap("graphics/exp2_0.png", 64, 64, gameOver);
 			expl.add("boom", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 15, 15, 15, 15], 10, false);
@@ -158,6 +161,7 @@ class Ship extends Entity
 		}
 		
 		{
+			score = cash;
 			var t = new Text('Final score: $score\nSurvived for: ${Std.int(time)}s', {color: 0xFFFFFF, size: 30});
 			t.x = 100;
 			t.y = 200;
