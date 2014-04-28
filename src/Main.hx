@@ -1,5 +1,6 @@
 import com.haxepunk.Engine;
 import com.haxepunk.HXP;
+import com.haxepunk.Sfx;
 import com.haxepunk.debug.Console;
 import com.haxepunk.utils.Key;
 import com.haxepunk.utils.Input;
@@ -17,6 +18,9 @@ class Main extends Engine
 		Input.define("right", [Key.RIGHT]);
 		Input.define("up", [Key.UP]);
 		Input.define("down", [Key.DOWN]);
+		
+		var s = new Sfx(#if flash "audio/music.mp3" #else "audio/music.ogg" #end);
+		s.loop(0.5);
 	}
 
 	public static function main ()

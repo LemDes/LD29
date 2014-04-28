@@ -2,6 +2,7 @@ package entities;
 
 import com.haxepunk.Entity;
 import com.haxepunk.HXP;
+import com.haxepunk.Sfx;
 import com.haxepunk.graphics.Image;
 import com.haxepunk.graphics.Text;
 import com.haxepunk.masks.Hitbox;
@@ -98,7 +99,14 @@ class Harbor extends Entity
 	function sell ()
 	{
 		var ship:Ship = cast(scene, scenes.BoatStage).ship;	
-		ship.sell();
+		
+		if (ship.value() > 0)
+		{
+			var s = new Sfx(#if flash "audio/cash.mp3" #else "audio/cash.ogg" #end);
+			s.play();
+			ship.sell();
+		}
+		
 		updateShop();
 	}
 	
@@ -110,6 +118,12 @@ class Harbor extends Entity
 		scene.updateLists();
 	}
 	
+	function buyFuel ()
+	{
+		var s = new Sfx(#if flash "audio/fuel.mp3" #else "audio/fuel.ogg" #end);
+		s.play();
+	}
+	
 	function buy10 ()
 	{
 		var ship:Ship = cast(scene, scenes.BoatStage).ship;
@@ -118,6 +132,7 @@ class Harbor extends Entity
 		{
 			ship.cash -= 10;
 			ship.fuel = Std.int(Math.min(ship.fuel + 150, ship.fuelMax * 15));
+			buyFuel();
 		}
 		
 		updateShop();
@@ -132,6 +147,7 @@ class Harbor extends Entity
 		{
 			ship.cash -= fullPrice;
 			ship.fuel = 15 * ship.fuelMax;
+			buyFuel();
 		}
 		
 		updateShop();

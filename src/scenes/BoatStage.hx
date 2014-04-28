@@ -4,6 +4,7 @@ import com.haxepunk.Entity;
 import com.haxepunk.HXP;
 import com.haxepunk.Scene;
 import com.haxepunk.graphics.Backdrop;
+import com.haxepunk.graphics.Text;
 
 import com.haxepunk.tmx.TmxEntity;
 import com.haxepunk.tmx.TmxMap;
@@ -17,9 +18,15 @@ class BoatStage extends Scene
 	public var radarUI : entities.RadarUI;
 	public var harbor : entities.Harbor;
 	
-	private var minItem:Int = 10;
-	private var maxTry:Int = 20;
+	private var minItem:Int = 750;
 	private var proba:Float = 1.0 ;
+	
+	public var boatStartX:Float;
+	public var boatStartY:Float;
+	
+	var fuelGUI:Text;
+	var capacityGUI:Text;
+	var cashGUI:Text;
 	
 	override public function begin ()
 	{	
@@ -45,9 +52,15 @@ class BoatStage extends Scene
 			
 			if (object.type == "ship")
 			{
-				add(ship = new entities.Ship("small", 100, object.x, object.y));
+				boatStartX = object.x;
+				boatStartY = object.y;
+				// add(ship = new entities.Ship("small", 100, 10, object.x, object.y));
+				add(ship = new entities.Ship("small", 100, 10, object.x, object.y));
 			}
 		}
+		
+		
+		addProgressbars();
 		
 		updateLists();
 		
@@ -79,5 +92,49 @@ class BoatStage extends Scene
 		
 		camera.x = Math.max(0, Math.min(map.fullWidth - HXP.screen.width, camera.x));
 		camera.y = Math.max(0, Math.min(map.fullHeight - HXP.screen.height, camera.y));
+		
+		updateGUI();
+	}
+	
+	function addProgressbars()
+	{
+		var dx : Float = 0;
+		
+		{
+			fuelGUI = new Text('Fuel: ${Std.int(ship.fuel / 15)} / $ship.fuelMax', 0, 0, 0, 0, {color: 0, size: 20});
+			var e = addGraphic(fuelGUI);
+			e.followCamera = true;
+			e.x = 40;
+			e.y = 10;
+			dx = e.x + fuelGUI.width/2;
+			// trace(fuelGUI.width);
+			// trace(e.width);
+		}
+		
+		{
+			capacityGUI = new Text('Cargo: ${ship.capacity} / $ship.maxCapacity', 0, 0, 0, 0, {color: 0, size: 20});
+			var e = addGraphic(capacityGUI);
+			e.followCamera = true;
+			e.y = 10;
+			e.x = dx + 30;
+			dx = e.x + capacityGUI.width/2;
+			// trace(capacityGUI.width);
+		}
+		
+		{
+			cashGUI = new Text('Money: ${ship.cash}$$', 0, 0, 0, 0, {color: 0, size: 20});
+			var e = addGraphic(cashGUI);
+			e.followCamera = true;
+			e.y = 10;
+			e.x = dx ;
+			// trace(e.x);
+		}
+	}
+	
+	public function updateGUI ()
+	{
+		fuelGUI.text = 'Fuel: ${Std.int(ship.fuel / 15)} / ${ship.fuelMax}';			
+		capacityGUI.text = 'Cargo: ${ship.capacity} / ${ship.maxCapacity}';
+		cashGUI.text = 'Money: ${ship.cash}$$';
 	}
 }

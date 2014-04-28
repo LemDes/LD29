@@ -2,6 +2,7 @@ package entities;
 
 import com.haxepunk.Entity;
 import com.haxepunk.HXP;
+import com.haxepunk.Sfx;
 import com.haxepunk.graphics.Graphiclist;
 import com.haxepunk.graphics.Image;
 import com.haxepunk.graphics.Spritemap;
@@ -34,12 +35,15 @@ class Ship extends Entity
 	public var boatType:String;
 	
 	public var paused : Bool = false;
+	
+	var shipSound : Sfx;
 		
 	override public function new (type:String, fuelMax:Int, maxCapacity:Int, x:Float, y:Float,?cash:Int=0)
 	{
 		super(x, y);
 		
 		boatType = type;
+		shipSound = new Sfx(#if flash "audio/ship.mp3" #else "audio/ship.ogg" #end);
 		
 		fuel = this.fuelMax = fuelMax;
 		this.maxCapacity = maxCapacity;
@@ -162,6 +166,11 @@ class Ship extends Entity
 				{
 					x = ox;
 					y = oy;
+					shipSound.stop();
+				}
+				else
+				{
+					shipSound.play();
 				}
 			}
 			
@@ -179,6 +188,9 @@ class Ship extends Entity
 		else if (alive)
 		{
 			alive = false;
+			
+			var s = new Sfx(#if flash "audio/boom.mp3" #else "audio/boom.ogg" #end);
+			s.play();
 			
 			var expl = new Spritemap("graphics/exp2_0.png", 64, 64, gameOver);
 			expl.add("boom", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 15, 15, 15, 15], 10, false);
