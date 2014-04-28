@@ -14,18 +14,24 @@ class Message extends Entity
 	
 	public function new(message:String, ?duration=5)
 	{
-		super(0, HXP.height - 20);
-		followCamera = true;
+		super();//0, HXP.height - 20);
+		//followCamera = true;
 		
 		timeStamp = Timer.stamp();
 		this.duration = duration;
-		graphic = new Text(message);
-		cast(graphic, Text).color = 0;
-		
+		graphic = new Text();
+		cast(graphic, Text).addStyle("b", {color: 0xFFEF00, bold: true, size: 20});
+		cast(graphic, Text).richText = "<b>" + message + "</b>";
+		cast(graphic, Text).centerOrigin();
+		layer = -10;
 	}
 	
 	override public function added()
 	{
+		var ship = cast(scene, scenes.BoatStage).ship;
+		x = ship.centerX;
+		y = ship.centerY;
+	
 		if (currentMessage != null)
 		{
 			HXP.scene.remove(currentMessage);
