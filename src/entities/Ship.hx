@@ -15,7 +15,7 @@ import flash.geom.Point;
 
 class Ship extends Entity
 {
-	static inline var SPEED:Int = 3;
+	static inline var SPEED:Int = 5;
 	
 	public var capacity:Int = 0;
 	public var maxCapacity(default,null):Int;
@@ -176,6 +176,7 @@ class Ship extends Entity
 			i.y = HXP.halfHeight;
 			var e = scene.addGraphic(i);
 			e.followCamera = true;
+			e.layer = -20;
 		}
 		
 		{
@@ -185,6 +186,7 @@ class Ship extends Entity
 			t.y = 100;
 			var e = scene.addGraphic(t);
 			e.followCamera = true;
+			e.layer = -20;
 		}
 		{
 			if (victory)
@@ -204,6 +206,7 @@ class Ship extends Entity
 			t.y = 200;
 			var e = scene.addGraphic(t);
 			e.followCamera = true;
+			e.layer = -20;
 		}
 		
 		{
@@ -213,6 +216,7 @@ class Ship extends Entity
 			t.y = HXP.height - 100;
 			var e = scene.addGraphic(t);
 			e.followCamera = true;
+			e.layer = -20;
 		}
 	}
 	

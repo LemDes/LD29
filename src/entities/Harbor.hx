@@ -73,6 +73,7 @@ class Harbor extends Entity
 			i.y = HXP.halfHeight;
 			var e = scene.addGraphic(i);
 			e.followCamera = true;
+			e.layer = -20;
 			shop[shop.length] = e;
 		}
 		
