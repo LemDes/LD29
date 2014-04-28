@@ -17,6 +17,8 @@ class HomeBeaconDistance extends Entity
 		super();
 		
 		graphic = distance = new Text("0m", 0, 0, 0, 0, {color: 0});
+		
+		layer = -10;
 	}
 	
 	override public function update ()

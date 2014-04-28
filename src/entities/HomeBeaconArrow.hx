@@ -24,6 +24,7 @@ class HomeBeaconArrow extends Entity
 		arrow.centerOrigin();
 		arrow.smooth = true;
 		graphic = arrow;
+		layer = -10;
 	}
 	
 	static function createArrow (radius:Int)
