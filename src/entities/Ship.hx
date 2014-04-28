@@ -114,6 +114,7 @@ class Ship extends Entity
 						capacity += treasure.weight;
 						treasureList.push(treasure);
 						scene.remove(treasure);
+						HXP.scene.add(new ui.Message("You picked a " + treasure.descr + ".",4));
 					}
 					else
 					{
@@ -191,6 +192,7 @@ class Ship extends Entity
 		}
 		
 		{
+			score = cash;
 			var t = new Text('Final score: $score\nSurvived for: ${Std.int(time)}s', {color: 0xFFFFFF, size: 30});
 			t.x = 100;
 			t.y = 200;

@@ -12,12 +12,19 @@ class Message extends Entity
 	private var timeStamp:Float;
 	private var duration:Float;
 	
-	public function new(message:String, ?x:Float=0, ?y:Float=0, ?duration=5)
+	public function new(message:String, ?duration=5)
 	{
-		super(x,y);
+		super(0, HXP.height - 20);		
+		// super(x,y);		
+		followCamera = true;
+		
 		timeStamp = Timer.stamp();
 		this.duration = duration;
+		// var text = new Text(message);
+		// text.color = 0x00ffff;
 		graphic = new Text(message);
+		cast(graphic, Text).color = 0;
+		
 	}
 	
 	override public function added()
