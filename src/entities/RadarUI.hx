@@ -81,6 +81,11 @@ class RadarUI extends Entity
 			boat = new Image('graphics/ships/ship_${boatType}_body.png');
 			boat.centerOO();
 			var scale = radius/cast(HXP.scene,scenes.BoatStage).radar.radius;
+			if (boatType == "large")
+			{
+				scale *=0.75;
+			}
+			trace(scale);
 			boat.scaleX = scale;
 			boat.scaleY = scale;
 			boat.x = radius;

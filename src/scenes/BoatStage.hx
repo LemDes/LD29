@@ -59,7 +59,7 @@ class BoatStage extends Scene
 				boatStartX = object.x;
 				boatStartY = object.y;
 				// add(ship = new entities.Ship("small", 100, 10, object.x, object.y));
-				add(ship = new entities.Ship("small", 100, 10, object.x, object.y));
+				add(ship = new entities.Ship("small", 100, 10, object.x, object.y,10000000));
 			}
 		}
 		

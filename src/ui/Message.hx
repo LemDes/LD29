@@ -19,7 +19,7 @@ class Message extends Entity
 		timeStamp = Timer.stamp();
 		this.duration = duration;
 		graphic = new Text();
-		cast(graphic, Text).addStyle("b", {color: 0xFFEF00, bold: true, size: 20});
+		cast(graphic, Text).addStyle("b", {color: 0x0004FF, bold: true, size: 20});
 		cast(graphic, Text).richText = "<b>" + message + "</b>";
 		cast(graphic, Text).centerOrigin();
 		layer = -10;

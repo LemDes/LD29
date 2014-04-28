@@ -51,6 +51,10 @@ class Ship extends Entity
 		fuel *= 15;
 		
 		var boat = new Image('graphics/ships/ship_${type}_body.png');
+		if (type == "large")
+		{
+			boat.scale = 0.75;
+		}
 		boat.centerOO();
 		boat.smooth = true;
 		
