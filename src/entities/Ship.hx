@@ -29,6 +29,7 @@ class Ship extends Entity
 	public var fuelMax:Int;
 	var alive:Bool = true;
 	var victory:Bool = false;
+	static var allowReset(default,null):Bool = false;
 	
 	
 	var time : Float = 0;
@@ -70,6 +71,14 @@ class Ship extends Entity
 	
 	override public function update ()
 	{
+		if (Input.pressed(Key.R)) 
+		{ 
+			if (allowReset)
+			{
+				allowReset = false;
+				Main.reset();
+			}
+		}
 		if (paused)
 		{
 			return;
@@ -86,6 +95,7 @@ class Ship extends Entity
 			if (Input.check("down")) { dy -= SPEED_Y; }
 			if (Input.check("left")) { dx += SPEED_X; }
 			if (Input.check("right")) { dx -= SPEED_X; }
+			
 			if (Input.pressed(Key.E))
 			{
 				var e = collide("treasure",x,y);
@@ -174,6 +184,7 @@ class Ship extends Entity
 	
 	function gameOver ()
 	{
+		allowReset = true;
 		{
 			var i = new Image("graphics/ui.png");
 			i.centerOrigin();

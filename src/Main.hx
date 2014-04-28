@@ -19,6 +19,11 @@ class Main extends Engine
 		Input.define("up", [Key.UP]);
 		Input.define("down", [Key.DOWN]);
 	}
+	
+	public static function reset()
+	{
+		HXP.scene = new scenes.BoatStage();
+	}
 
 	public static function main ()
 	{
