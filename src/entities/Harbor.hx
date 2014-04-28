@@ -5,6 +5,8 @@ import com.haxepunk.HXP;
 import com.haxepunk.graphics.Image;
 import com.haxepunk.graphics.Text;
 import com.haxepunk.masks.Hitbox;
+import com.haxepunk.utils.Input;
+import com.haxepunk.utils.Key;
 
 class Harbor extends Entity
 {
@@ -16,6 +18,13 @@ class Harbor extends Entity
 		
 		setHitbox(Std.int(width), Std.int(height));
 		type = "harbor";
+		
+		var t = new Text("Press S to open harbour shop", {color: 0, size: 20});
+		t.centerOrigin();
+		shopMsg = new Entity();
+		shopMsg.graphic = t;
+		shopMsg.x = centerX;
+		shopMsg.y = centerY + 20;
 	}
 	
 	override public function update ()
@@ -27,11 +36,26 @@ class Harbor extends Entity
 		{
 			_collideShip = collideShip;
 			
-			if(collideShip)
+			if (collideShip)
 			{
-				ship.paused = true;
-				openShop();
+				// add msg
+				scene.add(shopMsg);
 			}
+			else
+			{
+				// del msg
+				scene.remove(shopMsg);
+			}
+		}
+		
+		if (collideShip && Input.pressed(Key.S))
+		{
+			ship.paused = !ship.paused;
+			
+			if (ship.paused)
+				openShop();
+			else
+				closeShop();
 		}
 	}
 	
@@ -49,12 +73,14 @@ class Harbor extends Entity
 			shop[shop.length] = e;
 		}
 		
+		var fullPrice = ship.fuelMax - Std.int(ship.fuel / 15);
+		
 		shop[shop.length] = scene.add(new ui.TextButton(45, 210, "Upgrade to a medium ship\nFuel capacity: 250\nCargo capacity: 30\nPrice: 1,000$", 0xFFFFFF, 0x0000FF, buyMedium, {size: 20}));
 		shop[shop.length] = scene.add(new ui.TextButton(45, 320, "Upgrade to a large ship\nFuel capacity: 600\nCargo capacity: 100\nPrice: 20,000$", 0xFFFFFF, 0x0000FF, buyLarge, {size: 20}));
-		shop[shop.length] = scene.add(new ui.TextButton(45, 145, 'Sell your cargo for ${ship.value()}$$', 0xFFFFFF, 0x0000FF, sell, {size: 20}));
-		shop[shop.length] = scene.add(new ui.TextButton(305, 135, "Buy 10 fuel\nX$", 0xFFFFFF, 0x0000FF, buy10, {size: 20}));
-		shop[shop.length] = scene.add(new ui.TextButton(445, 135, "Buy full fuel\nY$", 0xFFFFFF, 0x0000FF, buyFull, {size: 20}));
-		shop[shop.length] = scene.add(new ui.TextButton(470, 70, "Close the shop", 0xFFFFFF, 0x0000FF, closeShop, {size: 20}));
+		shop[shop.length] = scene.add(new ui.TextButton(65, 135, 'Sell your cargo content\nValue: ${ship.value()}$$', 0xFFFFFF, 0x0000FF, sell, {size: 20, align: "center"}));
+		shop[shop.length] = scene.add(new ui.TextButton(305, 135, "Buy 10 fuel\n10$", 0xFFFFFF, 0x0000FF, buy10, {size: 20, align: "center"}));
+		shop[shop.length] = scene.add(new ui.TextButton(445, 135, 'Buy full fuel\n$fullPrice$$', 0xFFFFFF, 0x0000FF, buyFull, {size: 20, align: "center"}));
+		shop[shop.length] = scene.add(new ui.TextButton(580, 55, "X", 0xFFFFFF, 0x0000FF, closeShop, {size: 20}));
 	}
 	
 	function closeShop ()
@@ -71,7 +97,12 @@ class Harbor extends Entity
 	{
 		var ship:Ship = cast(scene, scenes.BoatStage).ship;	
 		ship.sell();
-		ship.updateGUI();
+		updateShop();
+	}
+	
+	function updateShop()
+	{
+		cast(scene, scenes.BoatStage).ship.updateGUI();
 		closeShop();
 		openShop();
 		scene.updateLists();
@@ -79,12 +110,29 @@ class Harbor extends Entity
 	
 	function buy10 ()
 	{
+		var ship:Ship = cast(scene, scenes.BoatStage).ship;
 		
+		if (ship.cash >= 10 && ship.fuel < ship.fuelMax * 15)
+		{
+			ship.cash -= 10;
+			ship.fuel = Std.int(Math.min(ship.fuel + 150, ship.fuelMax * 15));
+		}
+		
+		updateShop();
 	}
 	
 	function buyFull ()
 	{
+		var ship:Ship = cast(scene, scenes.BoatStage).ship;
+		var fullPrice = ship.fuelMax - Std.int(ship.fuel / 15);
 		
+		if (ship.cash >= fullPrice && ship.fuel < ship.fuelMax * 15)
+		{
+			ship.cash -= fullPrice;
+			ship.fuel = 15 * ship.fuelMax;
+		}
+		
+		updateShop();
 	}
 	
 	function buyMedium ()
@@ -98,4 +146,5 @@ class Harbor extends Entity
 	}
 	
 	var _collideShip : Bool = false;
+	var shopMsg : Entity;
 }

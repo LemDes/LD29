@@ -24,8 +24,8 @@ class Ship extends Entity
 	public var cash:Int = 0;
 	var cashGUI:Text;
 	
-	public var fuel(default, null):Int;
-	var fuelMax:Int;
+	public var fuel:Int;
+	public var fuelMax:Int;
 	var fuelGUI:Text;
 	var alive:Bool = true;
 	
