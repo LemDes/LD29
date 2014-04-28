@@ -35,8 +35,6 @@ class Ship extends Entity
 	public var boatType:String;
 	
 	public var paused : Bool = false;
-	
-	var shipSound : Sfx;
 		
 	override public function new (type:String, fuelMax:Int, maxCapacity:Int, x:Float, y:Float,?cash:Int=0)
 	{
@@ -44,7 +42,6 @@ class Ship extends Entity
 		
 		boatType = type;
 		shipSound = new Sfx(#if flash "audio/ship.mp3" #else "audio/ship.ogg" #end);
-		
 		fuel = this.fuelMax = fuelMax;
 		this.maxCapacity = maxCapacity;
 		
@@ -166,11 +163,6 @@ class Ship extends Entity
 				{
 					x = ox;
 					y = oy;
-					shipSound.stop();
-				}
-				else
-				{
-					shipSound.play();
 				}
 			}
 			
@@ -223,7 +215,6 @@ class Ship extends Entity
 		}
 		
 		{
-			score = cash;
 			var t = new Text('Final score: $score\nSurvived for: ${Std.int(time)}s', 0, 0, 0, 0, {color: 0xFFFFFF, size: 30});
 			t.x = 100;
 			t.y = 200;
@@ -243,7 +234,10 @@ class Ship extends Entity
 	
 	public function sell()
 	{
-		cash += value();
+		var v = value();
+		cash += v;
+		score += v;
+		
 		treasureList = new Array<Treasure>();
 		capacity = 0;
 	}

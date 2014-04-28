@@ -64,19 +64,28 @@ class BoatStage extends Scene
 		
 		updateLists();
 		
-		var collider = new entities.Treasure(0, 0);
-		var treasures = new Array<entities.Treasure>();
-		
-		while ( minItem > treasures.length)
+		for (i in 1...15)
 		{
-			var x = map.tileWidth + Std.random(map.width-2) * map.tileWidth;
-			var y = map.tileHeight + Std.random(map.height-2) * map.tileHeight;
-			
-			if (collider.collideTypes(["solid", "treasure", "harbor"], x, y, true) == null)
+			for (j in 1...15)
 			{
-				var t = new entities.Treasure(x, y);
-				treasures.push(t);
-				add(t);
+				var collider = new entities.Treasure(0, 0);		
+				var c = 0;
+				var tryC = 0;
+				
+				while (c < minItem && tryC < maxTry)
+				{
+					tryC += 1;
+					
+					var x = (Std.random(5) + i*5) * map.tileWidth;
+					var y = (Std.random(5) + j*5) * map.tileHeight;
+					
+					if (collider.collideTypes(["solid", "harbor"], x, y, true) == null)
+					{
+						var t = new entities.Treasure(x, y);
+						add(t);
+						c += 1;
+					}
+				}
 			}
 		}
 		
