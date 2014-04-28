@@ -74,18 +74,21 @@ class Ship extends Entity
 			if (Input.check("down")) { dy -= SPEED; }
 			if (Input.check("left")) { dx += SPEED; }
 			if (Input.check("right")) { dx -= SPEED; }
-			if (Input.check(Key.E))
+			if (Input.pressed(Key.E))
 			{
 				var e = collide("treasure",x,y);
 				if (e != null)
 				{
 					var treasure = cast(e,Treasure);
-					trace(capacity+" "+treasure.weight);
-					if(capacity + treasure.weight < maxCapacity)
+					if(capacity + treasure.weight <= maxCapacity)
 					{
 						capacity += treasure.weight;
 						treasureList.push(treasure);
 						scene.remove(treasure);
+					}
+					else
+					{
+						HXP.scene.add(new ui.Message("This treasure weights too much", HXP.camera.x, HXP.camera.y + HXP.height - 20,4));
 					}
 				}
 			}

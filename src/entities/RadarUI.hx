@@ -31,7 +31,7 @@ class RadarUI extends Entity
 		var type = "small";
 		boat = new Image('graphics/ships/ship_${type}_body.png');
 		boat.centerOO();
-		var scale = 0.5*radius/cast(HXP.scene,scenes.BoatStage).radar.radius;
+		var scale = radius/cast(HXP.scene,scenes.BoatStage).radar.radius;
 		boat.scaleX = scale;
 		boat.scaleY = scale;
 		boat.x = radius;
@@ -44,9 +44,9 @@ class RadarUI extends Entity
 	{
 		HXP.sprite.graphics.clear();
 		HXP.sprite.graphics.beginFill(0x00D400);
-		HXP.sprite.graphics.drawCircle(radius, radius, radius);
+		HXP.sprite.graphics.drawCircle(radius, radius, radius+1);
 		HXP.sprite.graphics.beginFill(0x005C01);
-		HXP.sprite.graphics.drawCircle(radius, radius, radius-1);
+		HXP.sprite.graphics.drawCircle(radius, radius, radius);
 		HXP.sprite.graphics.lineStyle(1, 0x00D400, 1, false, LineScaleMode.NORMAL, null, JointStyle.MITER);
 		HXP.sprite.graphics.moveTo(radius, 0);
 		HXP.sprite.graphics.lineTo(radius, radius * 2);
@@ -82,11 +82,12 @@ class RadarUI extends Entity
 		
 		for (treasure in treasureList)
 		{
-			var relativeX = Std.int(radius*(treasure.x - radar.x + radar.radius)/(2*radar.radius)) ;
-			var relativeY = Std.int(radius*(treasure.y - radar.y + radar.radius)/(2*radar.radius)) ;
+			var scale = radius/radar.radius;
+			var relativeX = Std.int((treasure.x - radar.x + radar.radius) * scale) ;
+			var relativeY = Std.int((treasure.y - radar.y + radar.radius) * scale) ;
 			var dot = Image.createCircle(2, 0x00FF00);
-			dot.x = relativeX - 2 + radius/2;
-			dot.y = relativeY - 2 + radius/2;
+			dot.x = relativeX - 2;
+			dot.y = relativeY - 2;
 			gl.add(dot);			
 		}
 	}
