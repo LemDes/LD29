@@ -34,9 +34,9 @@ class Ship extends Entity
 	
 	public var paused : Bool = false;
 		
-	override public function new (type:String, fuelMax:Int)
+	override public function new (type:String, fuelMax:Int, x:Float, y:Float)
 	{
-		super(400, 400);
+		super(x, y);
 		
 		fuel = this.fuelMax = fuelMax;
 		fuel *= 15;
@@ -124,26 +124,37 @@ class Ship extends Entity
 			}
 			
 			var ok = true;
-			var da = HXP.sign(dx);
-			for (i in 1...Std.int(Math.abs(dx)))
+			var da = HXP.sign(dx) * 3;
+			
+			if (dx != 0)
 			{
-				if (ok)
-				{
-					cast(mask, Polygon).angle += da;
-					cast(graphic, Image).angle += da;
-				}
+				cast(mask, Polygon).angle += dx;
+				cast(graphic, Image).angle += dx;
 				
 				if (collide("solid", x, y) != null)
 				{
-					cast(mask, Polygon).angle -= da;
-					cast(graphic, Image).angle -= da;
-					ok = false;
+					cast(mask, Polygon).angle -= dx;
+					cast(graphic, Image).angle -= dx;
 				}
-			}		
+			}
 			
 			var ox = x;
 			var oy = y;
-			moveAtAngle(cast(graphic, Image).angle + 90, dy, "solid");
+			
+			if (dy != 0)
+			{				
+				var a = (cast(graphic, Image).angle + 90) * HXP.RAD;
+				
+				x += Math.cos(a) * dy;
+				y += Math.sin(a) * dy;
+				
+				if (collide("solid", x, y) != null)
+				{
+					x = ox;
+					y = oy;
+				}
+			}
+			
 			fuel -= Std.int(HXP.distance(x, y, ox, oy));
 			
 			updateGUI();
