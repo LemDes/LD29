@@ -14,8 +14,7 @@ class Message extends Entity
 	
 	public function new(message:String, ?duration=5)
 	{
-		super();//0, HXP.height - 20);
-		//followCamera = true;
+		super();
 		
 		timeStamp = Timer.stamp();
 		this.duration = duration;

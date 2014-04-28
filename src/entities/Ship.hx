@@ -15,7 +15,8 @@ import flash.geom.Point;
 
 class Ship extends Entity
 {
-	static inline var SPEED:Int = 5;
+	static inline var SPEED_X:Int = 3;
+	static inline var SPEED_Y:Int = 5;
 	
 	public var capacity:Int = 0;
 	public var maxCapacity(default,null):Int;
@@ -77,10 +78,10 @@ class Ship extends Entity
 			var dx:Int = 0;
 			var dy:Int = 0;
 			
-			if (Input.check("up")) { dy += SPEED; }
-			if (Input.check("down")) { dy -= SPEED; }
-			if (Input.check("left")) { dx += SPEED; }
-			if (Input.check("right")) { dx -= SPEED; }
+			if (Input.check("up")) { dy += SPEED_Y; }
+			if (Input.check("down")) { dy -= SPEED_Y; }
+			if (Input.check("left")) { dx += SPEED_X; }
+			if (Input.check("right")) { dx -= SPEED_X; }
 			if (Input.pressed(Key.E))
 			{
 				var e = collide("treasure",x,y);
