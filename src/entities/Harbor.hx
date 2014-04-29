@@ -164,7 +164,7 @@ class Harbor extends Entity
 			ship.sell();
 			HXP.scene.remove(ship);
 			HXP.scene.add(boatStage.ship = new Ship("medium",250,30, boatStage.boatStartX, boatStage.boatStartY,ship.cash));
-			boatStage.radar.radius = 80;
+			boatStage.radar.radius = 110;
 		}
 		updateShop();
 	}
@@ -179,7 +179,7 @@ class Harbor extends Entity
 			ship.sell();
 			HXP.scene.remove(ship);
 			HXP.scene.add(boatStage.ship = new Ship("large",600,100, boatStage.boatStartX, boatStage.boatStartY,ship.cash));
-			boatStage.radar.radius = 140;
+			boatStage.radar.radius = 200;
 		}
 		updateShop();
 	}

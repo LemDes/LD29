@@ -11,14 +11,14 @@ import com.haxepunk.tmx.TmxMap;
 
 class BoatStage extends Scene
 {
-	var map : TmxMap;
+	public var map(default,null) : TmxMap;
 	
 	public var ship : entities.Ship;
 	public var radar : entities.Radar;
 	public var radarUI : entities.RadarUI;
 	public var harbor : entities.Harbor;
 	
-	private var minItem:Int = 2;
+	private var minItem:Int = 1;
 	private var maxTry:Int = 5;
 	private var proba:Float = 1.0 ;
 	
@@ -69,8 +69,10 @@ class BoatStage extends Scene
 		updateLists();
 		
 		for (i in 1...15)
+		// for (i in 2...14)
 		{
 			for (j in 1...15)
+			// for (j in 2...14)
 			{
 				var collider = new entities.Treasure(0, 0);		
 				var c = 0;
@@ -141,7 +143,7 @@ class BoatStage extends Scene
 			var e = addGraphic(cashGUI);
 			e.followCamera = true;
 			e.y = 10;
-			e.x = dx + 30;
+			e.x = dx;
 			dx = e.x + cashGUI.width;
 			// trace(e.x);
 		}

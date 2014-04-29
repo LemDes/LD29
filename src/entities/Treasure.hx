@@ -7,7 +7,7 @@ import com.haxepunk.masks.Hitbox;
 class Treasure extends Entity
 {	
 	
-	private static var itemNames:Array<String> = ["pot", "pile of scrap","chest", "anchor"];
+	private static var itemNames:Array<String> = ["pot", "pile of scrap", "anchor","chest"];
 	
 	public var weight(default,null):Int;
 	public var price(default,null):Int;
@@ -20,10 +20,16 @@ class Treasure extends Entity
 	{
 		super(x,y);
 		
-		weight = 1 + Std.random(maxWeight);
+		var height = cast(HXP.scene, scenes.BoatStage).map.height * cast(HXP.scene, scenes.BoatStage).map.tileHeight;
+		var probaWeight = (height - y) / height;
+		
+		
+		// weight = 1 + Std.random(maxWeight);
+		weight = Std.int(maxWeight * (0.05 + probaWeight * 1.5*Math.random()));
 		price = weight * ( 3 + Std.random(maxPricePerWeight) );
 		
-		var i = Std.random(itemNames.length-1);
+		var i = Std.random(itemNames.length);
+		price *= Std.int(i/2+1);
 		
 		descr = ((weight > (i+1)*3) ? "big " : "small ") + itemNames[i];
 		

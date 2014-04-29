@@ -6,13 +6,23 @@ import com.haxepunk.masks.Circle;
 
 class Radar extends Entity
 {
-	public var radius:Int;
+	private var _radius:Int;
+	public var radius(get, set):Int;
+	private inline function get_radius():Int {return _radius;}
+	
+	private function set_radius(value:Int):Int
+	{
+		_radius = value;
+		// mask = new Circle(_radius, -1*Std.int(x-3*_radius), -1*Std.int(y-3*_radius));
+		cast(mask, Circle).radius = _radius;
+		return _radius;
+	}
 	
 	public function new(radius:Int, ?x:Int=0, ?y:Int=0)
 	{
 		super(x,y);
-		this.radius = radius;
-		mask = new Circle(radius, -1*Std.int(x-3*radius), -1*Std.int(y-3*radius));
+		this._radius = radius;
+		mask = new Circle(_radius, -1*Std.int(x-3*_radius), -1*Std.int(y-3*_radius));
 		type = "radar";
 	}
 		
